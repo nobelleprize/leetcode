@@ -1,0 +1,20 @@
+Binary Heap
+--------------------------------------------------------------------------------------------
+- A Binary Heap is a Binary Tree
+
+1) It is a complete tree (all levels are completely filled except possibly the last level
+    and the last level has all keys as possible to the left). Allows them to be stored in
+    an array
+
+2) A Binary Heap is either a Min Heap or a Max heap, the key at the root must be the min/max
+    among all keys present in the Heap. The same property is recrusively true for all nodes
+    in the tree
+
+Representation
+--------------------------------------------------------------------------------------------
+- root element: arr[0]
+- parent node:  arr[ (i - 2) / 2]
+- left node:    arr[ (i * 2) + 1 ]
+- right node:   arr[ (i * 2) + 2 ]
+
+

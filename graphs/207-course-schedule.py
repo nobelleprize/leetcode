@@ -1,37 +1,44 @@
 # https://leetcode.com/problems/course-schedule/
-from collections import defaultdict
 
 def canFinish(numCourses, prerequisites):
-    d = dict()
-    for i in range(numCourses):
-        d[i] = []
+    dictionary = dict()
+    for i in range(0, numCourses):
+        dictionary[i] = []
     for p in prerequisites:
-        d[p[0]].append(p[1])
+        dictionary[p[0]].append(p[1])
+        if p[1] in dictionary.keys():
+            if p[0] in dictionary[p[1]]:
+                return False
+    
+    if all(len(value) > 0 for value in dictionary.values()):
+        return False
 
-    # if all(len(value) > 0 for value in d.values()):
-        # return False
+    visited = [0] * len(dictionary)
 
-    taken = set()
-    queue = []
-    for key, value in d.items():
-        if value != []:
-            queue = value
-        while queue:
-            popped = queue.pop(0)
+    for key, value in sorted(dictionary.items(), key=lambda x: len(x[1])):
+        if canTake(dictionary, key, visited) == False:
+            return False
 
-    print(d)
+    return True                
 
-def canTake(d_courses, course):
-    valid = set()
-    visited = set()
-    queue = d_courses[course]
-    while queue:
-        popped = queue.pop(0)
-        if popped not in valid:
-            visited.add(popped)
-            
+def canTake(dictionary, course, visited):
+    if visited[course] == 2:
+        return False
+    
+    visited[course] = 2
 
+    for neighbor in dictionary[course]:
+        if visited[neighbor] == 0:
+            if canTake(dictionary, neighbor, visited) == False:
+                return False
+        elif visited[neighbor] == 2:
+            return False
+        
+    visited[course] = 1
     return True
 
-# print(canFinish(2, [[1,0]]))
-print(canFinish(2, [[1,0],[0,1]]))
+
+# print(canFinish(5, [[1,4],[2,4],[3,1],[3,2]]))
+print(canFinish(8, [[1,0],[2,6],[1,7],[6,4],[7,0],[0,5]])) #true
+# print(canFinish(7, [[1,0],[0,3],[0,2],[3,2],[2,5],[4,5],[5,6],[2,4]]))
+# print(canFinish(4, [[1,2], [2,3], [3,1]]))

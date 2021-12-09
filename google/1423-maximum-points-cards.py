@@ -31,8 +31,9 @@ def maxScore(cardPoints, k):
     n = len(cardPoints)
 
     for i in range(k-1, -1, -1):
+        print(i)
         frontScore -= cardPoints[i]
-        rearScore += cardPoints[n - (k - i)]
+        rearScore += cardPoints[-(k - i)] # 7 - (3-2)
         if frontScore + rearScore > maxScore:
             maxScore = frontScore + rearScore
     return maxScore

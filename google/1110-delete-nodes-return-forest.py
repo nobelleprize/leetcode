@@ -6,28 +6,29 @@ class TreeNode:
         self.right = right
 
 def delNodes(root, to_delete):
-    to_delete_set = set(to_delete)
-    res = []
-    helper(root, True, to_delete_set, res)
-    return res
-    
+    to_delete = set(to_delete)
+    forest = []
+    if root.val not in to_delete:
+        forest.append(root)
+    helper(root, to_delete, forest)
 
-def helper(root, is_root, to_delete_set, result):
-    if not root: 
+    return forest
+
+def helper(root, to_delete, forest):
+    if root is None:
+        return None
+    
+    root.left = helper(root.left, to_delete, forest)
+    root.right = helper(root.right, to_delete, forest)
+
+    if root.val in to_delete:
+        if root.left != None:
+            forest.append(root.left)
+        if root.right != None:
+            forest.append(root.right)
         return None
 
-    root_deleted = root.val in to_delete_set
-
-    if is_root and not root_deleted:
-        result.append(root)
-
-    root.left = helper(root.left, root_deleted, to_delete_set, result)
-    root.right = helper(root.right, root_deleted, to_delete_set, result)
-    
-    if root_deleted:
-        return None
-    else:
-        return root
+    return root
 
 root = TreeNode(1)
 root.left = TreeNode(2)
@@ -37,6 +38,4 @@ root.left.right = TreeNode(5)
 root.right.left = TreeNode(6)
 root.right.right = TreeNode(7)
 
-result = delNodes(root, [3,5])
-for node in result:
-    print(node.val)
+result = delNodes(root, [2, 4])

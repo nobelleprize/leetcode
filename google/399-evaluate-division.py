@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/evaluate-division/
-from collections import defaultdict
+from collections import defaultdict 
 
 def calcEquation(equations, values, queries):
     graph = defaultdict(defaultdict)

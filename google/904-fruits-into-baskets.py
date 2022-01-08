@@ -2,20 +2,21 @@
 from collections import defaultdict
 
 def totalFruit(fruits):
-    d = defaultdict()
-    i = 0
-    j = 0
+    d = defaultdict(int)
+    
     result = 0
-    while j < len(fruits):
-        d[fruits[j]] = j
-        j += 1
+    j = 0
+    
+    for i in range(len(fruits)):
+        d[fruits[i]] = i
 
         if len(d) == 3:
             del_index = min(d.values())
             del d[fruits[del_index]]
-            i = del_index + 1
-        result = max(result, j-i)
-    
+            j = del_index + 1
+
+        result = max(result, i-j+1)
+
     return result
 
 

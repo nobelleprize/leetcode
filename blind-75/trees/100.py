@@ -1,30 +1,41 @@
-class Node:
+# https://leetcode.com/problems/same-tree/
+
+from xml.sax import default_parser_list
+
+
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-    
-    def isSameTree(self, p, q):
-        if p == None and q == None:
-            return True
 
-        if p == None or q == None:
-            return False
+def deserialize(string):
+    if string == '{}':
+        return None
+    nodes = [None if val == 'null' else TreeNode(int(val))
+             for val in string.strip('[]{}').split(',')]
+    kids = nodes[::-1]
+    root = kids.pop()
+    for node in nodes:
+        if node:
+            if kids: node.left  = kids.pop()
+            if kids: node.right = kids.pop()
+    return root
 
-        if p.val != q.val:
-            return False
+
+def isSameTree(p, q):
+    # p and q are both None
+    if not p and not q:
+        return True
+    # one of p and q is None
+    if not q or not p:
+        return False
+    if p.val != q.val:
+        return False
+    return isSameTree(p.right, q.right) and isSameTree(p.left, q.left)
+
+p = deserialize("[1,2]")
+q = deserialize("[1,null,2]")
+
+print(isSameTree(p, q))
         
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right) 
-
-
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-
-root2 = Node(1)
-root2.right = Node(2)
-
-
-
-print(root.isSameTree(root, root2))
-

@@ -1,36 +1,41 @@
 # https://leetcode.com/problems/binary-tree-level-order-traversal/
 
-class Node:
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
+def deserialize(string):
+    if string == '{}':
+        return None
+    nodes = [None if val == 'null' else TreeNode(int(val))
+             for val in string.strip('[]{}').split(',')]
+    kids = nodes[::-1]
+    root = kids.pop()
+    for node in nodes:
+        if node:
+            if kids: node.left  = kids.pop()
+            if kids: node.right = kids.pop()
+    return root
+
+
 def levelOrder(root):
-    levels = []
-    if not root:
-        return levels
-    
-    helper(root, 0, levels)
-    return levels
-    
-def helper(node, level, levels):
-    if len(levels) == level:
-        levels.append([])
-    
-    levels[level].append(node.val)
+    return helper(root, [], 0)
 
-    if node.left:
-        helper(node.left, level + 1, levels)
-    if node.right:
-        helper(node.right, level + 1, levels)
+def helper(root, result, level):
+    if root == None:
+        return
+        
+    if len(result) == level:
+        result.append([])
 
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-root.left.left = Node(4)
-root.left.right = Node(5)
-root.right.left = Node(6)
-root.right.right = Node(7)
+    result[level].append(root.val)
 
+    helper(root.left, result, level+1)
+    helper(root.right, result, level+1)
+
+    return result
+
+root = deserialize("[3,9,20,null,null,15,7]")
 print(levelOrder(root))

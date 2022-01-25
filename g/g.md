@@ -1,4 +1,3 @@
-Most Popular Problems for Google (last 6 months):
 Minimum Difference Between Largest and Smallest Value in Three Moves (35 times): https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/
 Guess the Word (32 times): https://leetcode.com/problems/guess-the-word/
 Logger Rate Limiter (31 times): https://leetcode.com/problems/logger-rate-limiter/
@@ -20,8 +19,7 @@ Longest Substring Without Repeating Characters (12 times): https://leetcode.com/
 Median of Two Sorted Arrays (12 times): https://leetcode.com/problems/median-of-two-sorted-arrays/
 Flip Equivalent Binary Trees (11 times): https://leetcode.com/problems/flip-equivalent-binary-trees/
 Add Two Numbers (11 times): https://leetcode.com/problems/add-two-numbers/
-Sentence Screen Fitting (11 times): https://leetcode.com/problems/sentence-screen-fitting/
-*Car Fleet (10 times): https://leetcode.com/problems/car-fleet/
+Sentence Screen Fitting (11 times): https://leetcode.com/problems/sentence-screen-fitting/*Car Fleet (10 times): https://leetcode.com/problems/car-fleet/
 Koko Eating Bananas (10 times): https://leetcode.com/problems/koko-eating-bananas/
 RLE Iterator (10 times): https://leetcode.com/problems/rle-iterator/
 Longest Increasing Path in a Matrix (10 times): https://leetcode.com/problems/longest-increasing-path-in-a-matrix/

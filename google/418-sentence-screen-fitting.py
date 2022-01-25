@@ -19,6 +19,13 @@ def wordsTyping(sentence, rows, cols):
 
     return result
 
+print(wordsTyping(sentence = ["hello","world"], rows = 2, cols = 8)) # 1
+# print(wordsTyping(sentence = ["a", "bcd", "e"], rows = 3, cols = 5)) # 2
+
+# print(wordsTyping(sentence = ["i","had","apple","pie"], rows = 4, cols = 5)) # 1
+
+# print(wordsTyping(["a", "bcd", "e"], 4, 6))
+
 # def wordsTyping(sentence, rows, cols):
 #     n = len(sentence)
 
@@ -41,11 +48,3 @@ def wordsTyping(sentence, rows, cols):
 #             times += 1
 #             i = 0
 #     return i, times
-
-
-# print(wordsTyping(sentence = ["hello","world"], rows = 2, cols = 8)) # 1
-print(wordsTyping(sentence = ["a", "bcd", "e"], rows = 3, cols = 5)) # 2
-
-# print(wordsTyping(sentence = ["i","had","apple","pie"], rows = 4, cols = 5)) # 1
-
-# print(wordsTyping(["a", "bcd", "e"], 4, 6))

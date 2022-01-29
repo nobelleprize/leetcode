@@ -1,7 +1,3 @@
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-from collections import defaultdict
-from operator import indexOf
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -44,19 +40,3 @@ def deserialize(string):
             if kids: node.left  = kids.pop()
             if kids: node.right = kids.pop()
     return root
-
-
-def buildTree(preorder, inorder):
-    if not preorder and not inorder:
-        return
-    
-    root = TreeNode(preorder[0])
-    mid = indexOf(inorder, preorder[0])
-
-    root.left = buildTree(preorder[1:mid+1], inorder[:mid])
-    root.right = buildTree(preorder[mid+1:], inorder[mid+1:]) 
-
-    return root
-
-# buildTree([3,9,20,15,7], [9,3,15,20,7])
-drawtree(buildTree([3,9,1,2,20,15,7], [1,9,2,3,15,20,7]))

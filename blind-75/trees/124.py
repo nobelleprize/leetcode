@@ -1,6 +1,6 @@
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-from collections import defaultdict
-from operator import indexOf
+# https://leetcode.com/problems/binary-tree-maximum-path-sum/
+from audioop import maxpp
+
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -45,18 +45,33 @@ def deserialize(string):
             if kids: node.right = kids.pop()
     return root
 
+def maxPathSum(root):
+    global max_sum
+    max_sum = float("-inf")
+    helper(root)
 
-def buildTree(preorder, inorder):
-    if not preorder and not inorder:
-        return
+    return max_sum
+
+def helper(root):
+    global max_sum
+
+    if root is None:
+        return 0
     
-    root = TreeNode(preorder[0])
-    mid = indexOf(inorder, preorder[0])
+    left = max(helper(root.left), 0)
+    right = max(helper(root.right), 0)
 
-    root.left = buildTree(preorder[1:mid+1], inorder[:mid])
-    root.right = buildTree(preorder[mid+1:], inorder[mid+1:]) 
+    current_sum = root.val + left + right
+    max_sum = max(current_sum, max_sum)
 
-    return root
+    return root.val + max(left, right)
 
-# buildTree([3,9,20,15,7], [9,3,15,20,7])
-drawtree(buildTree([3,9,1,2,20,15,7], [1,9,2,3,15,20,7]))
+
+# root = deserialize("[-4,-10,-5,-1,null,null,-6,-2,-3,-7,-9]")
+# print(maxPathSum(root))
+
+# root2 = deserialize("[-4,4,-5,-2,-3,null,3,null,null,null,null,1,8,null,null,null,null,null,null,null,null,6,7,9,10]")
+# print(maxPathSum(root2))
+
+root3 = deserialize("[1,2,3]")
+print(maxPathSum(root3))

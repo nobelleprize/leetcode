@@ -1,7 +1,4 @@
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-from collections import defaultdict
-from operator import indexOf
-
+# https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -46,17 +43,15 @@ def deserialize(string):
     return root
 
 
-def buildTree(preorder, inorder):
-    if not preorder and not inorder:
-        return
-    
-    root = TreeNode(preorder[0])
-    mid = indexOf(inorder, preorder[0])
+def kthSmallest(root, k):
+    return inorder(root)[k - 1]
 
-    root.left = buildTree(preorder[1:mid+1], inorder[:mid])
-    root.right = buildTree(preorder[mid+1:], inorder[mid+1:]) 
+def inorder(r):
+    if r:
+        return inorder(r.left) + [r.val] + inorder(r.right)
+    else:
+        return []
 
-    return root
 
-# buildTree([3,9,20,15,7], [9,3,15,20,7])
-drawtree(buildTree([3,9,1,2,20,15,7], [1,9,2,3,15,20,7]))
+root2 = deserialize("[5,3,6,2,4,null,null,1]")
+print(kthSmallest(root2, 3))

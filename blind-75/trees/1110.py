@@ -1,7 +1,3 @@
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
-from collections import defaultdict
-from operator import indexOf
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -45,18 +41,38 @@ def deserialize(string):
             if kids: node.right = kids.pop()
     return root
 
-
-def buildTree(preorder, inorder):
-    if not preorder and not inorder:
-        return
+def delNodes(root, to_delete):
+    result = []
+    to_delete = set(to_delete)
     
-    root = TreeNode(preorder[0])
-    mid = indexOf(inorder, preorder[0])
+    if root.val not in to_delete:
+        result.append(root)
 
-    root.left = buildTree(preorder[1:mid+1], inorder[:mid])
-    root.right = buildTree(preorder[mid+1:], inorder[mid+1:]) 
+    helper(root, to_delete, result)
 
+    return result
+
+def helper(root, to_delete, result):
+    if root is None:
+        return None
+    
+    root.left = helper(root.left, to_delete, result)
+    root.right = helper(root.right, to_delete, result)
+
+    if root.val in to_delete:
+        if root.left != None:
+            result.append(root.left)
+        if root.right != None:
+            result.append(root.right)
+        else:
+            return None
+    
     return root
 
-# buildTree([3,9,20,15,7], [9,3,15,20,7])
-drawtree(buildTree([3,9,1,2,20,15,7], [1,9,2,3,15,20,7]))
+
+
+root = deserialize("[1,2,3,4,5,6,7]")
+res = delNodes(root, [1])
+print(res)
+drawtree(res[1])
+        
